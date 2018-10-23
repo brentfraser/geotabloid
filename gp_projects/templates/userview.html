@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+	  <div class="row">
+		<h4 class="text-uppercase font-weight-bold title">Latest Images for {{ user.username }}</h4>
+	  </div>
+	  <div class="row">
+		<div class="card-columns">
+		  <div class="card">
+			<div class="card-body">
+        <div class="row">
+          <div class="col-sm-9 col-xs-9">
+            <h4 class="card-title">{{ user.name }}</h4>
+          </div>
+          <div class="col-sm-3 col-xs-3">
+            <img class="img-fluid logo" src="http://placehold.it/50x50?text=AVATAR">
+          </div>
+          <div class="col-sm-12">
+            <small class="text-muted">
+              <a href="#!"><strong>users.website.org</strong></a>
+            </small>
+          </div>
+        </div>
+			  <p class="card-text">
+          Track count:  {{ track_list|length }}<br>
+          Note count:  {{ note_list|length }}<br>
+          Image count:  {{ image_list|length }}<br>
+        </p>
+			  <p class="card-text text-right"><small class="text-muted">
+            <span class="social">
+              <a href="#!">
+                <i class="fab fa-facebook-square fa-2x" aria-hidden="true"></i>
+              </a>
+              <a href="#!">
+                <i class="fab fa-twitter-square fa-2x"></i>
+              </a>
+              <a href="#!">
+                <i class="fab fa-pinterest-square fa-2x"></i>
+              </a>
+              <a href="#!">
+                <i class="fab fa-instagram fa-2x" aria-hidden="true"></i>
+              </a>
+            </span>
+			  </small></p>
+        <a class="btn btn-primary" href="{% url 'users:detail' request.user.username  %}" role="button">My Info</a>
+			</div>
+		  </div>
+{% for image in image_list %}
+      <div class="card card-pin">
+			<img class="card-img" src="{{ image.image.url }}" alt="Card image">
+			  <div class="overlay">
+				<h3 class="card-title title">Some Title</h3>
+				<div class="download">
+				  <a href="http://lorempixel.com/486/320/" download>
+					<i class="fa fa-download" aria-hidden="true"></i>
+				  </a>
+				</div>
+				<div class="more">
+				  <a href="#!">
+					<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> More
+				  </a>
+				</div>
+			  </div>
+		  </div>
+{% endfor %}
+		</div>
+	  </div>
+</div>
+{% endblock content %}

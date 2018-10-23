@@ -56,6 +56,12 @@ RUN sed -i 's/\r//' /tmp/postgresql.conf
 
 RUN chmod +x /docker-entrypoint.sh
 
+# set up backup and restore scripts
+COPY ./compose/production/postgres/maintenance /usr/local/bin/maintenance
+RUN chmod +x /usr/local/bin/maintenance/*
+RUN mv /usr/local/bin/maintenance/* /usr/local/bin \
+    && rmdir /usr/local/bin/maintenance
+
 # Optimise postgresql
 RUN echo "kernel.shmmax=543252480" >> /etc/sysctl.conf
 RUN echo "kernel.shmall=2097152" >> /etc/sysctl.conf

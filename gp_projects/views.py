@@ -95,4 +95,4 @@ def UserView(request):
     image_list = ImageNote.objects.filter(owner=request.user)
     track_list = TrackFeature.objects.filter(owner=request.user)
     context = {'date_list': date_list, 'note_list': note_list, 'image_list': image_list, 'track_list': track_list}
-    return render(request, 'userproj.html', context)
+    return render(request, 'userview.html', context=context)

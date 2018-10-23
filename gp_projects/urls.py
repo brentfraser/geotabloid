@@ -7,6 +7,7 @@ from gp_projects import views
 urlpatterns = [
     # RESTful urls
     url(r'^index$', TemplateView.as_view(template_name="userprojects.html")),
+    url(r'^test', TemplateView.as_view(template_name="trackview.html")),
 
     url(r'^tracks/$', views.TrackList.as_view(), name='track-list'),
     url(r'^tracks/(?P<pk>[0-9]+)/$', views.TrackDetail.as_view(), name='track-detail'),
@@ -24,6 +25,7 @@ urlpatterns = [
     url(r'^usertracks$', TemplateView.as_view(template_name="usertracks.html"), name='usertracks'),
     url(r'^userimages', TemplateView.as_view(template_name="userimages.html"), name='userimages'),
     url(r'^usernotes', TemplateView.as_view(template_name="usernotes.html"), name='usernotes'),
+    url(r'^userview/$', views.UserView, name='user-view'),
 ]
 
 #router = DefaultRouter()
