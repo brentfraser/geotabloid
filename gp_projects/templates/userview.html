@@ -26,8 +26,10 @@
           Track count:  {{ track_list|length }}<br>
           Note count:  {{ note_list|length }}<br>
           Image count:  {{ image_list|length }}<br>
+          <a class="btn btn-outline-info btn-sm" href="{% url 'users:detail' request.user.username  %}" role="button">My Info</a>
         </p>
-			  <p class="card-text text-right"><small class="text-muted">
+			  <p class="card-text text-right">
+          <small class="text-muted">
             <span class="social">
               <a href="#!">
                 <i class="fab fa-facebook-square fa-2x" aria-hidden="true"></i>
@@ -43,7 +45,6 @@
               </a>
             </span>
 			  </small></p>
-        <a class="btn btn-primary" href="{% url 'users:detail' request.user.username  %}" role="button">My Info</a>
 			</div>
 		  </div>
 {% for image in image_list %}
