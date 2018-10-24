@@ -3,30 +3,77 @@
 {% block content %}
 <h1>Because every GeoPaparazzi needs a publisher!</h1>
 
-<p>How to use this site</p>
+<h2>How to use this site</h2>
 <div class="row">
   <div class="col-4">
-    <ul class="list-group">
-      <a class="list-group-item list-group-item-action" href="#list-item-1">1.  Get the Geopaparazzi App - play store</a>
+    <div id="list-setup" class="list-group">
+      <a class="list-group-item list-group-item-action" href="#list-item-1">1.  Get the Geopaparazzi App</a>
       <a class="list-group-item list-group-item-action" href="#list-item-2">2.  Set up cloud profiles</a>
       <a class="list-group-item list-group-item-action" href="#list-item-3">3.  Collect some tracks and images</a>
       <a class="list-group-item list-group-item-action" href="#list-item-4">4.  Upload your user project</a>
       <a class="list-group-item list-group-item-action" href="#list-item-5">5.  View your content</a>
-    </ul>
+    </div>
   </div>
   <div class="col-8">
-    <div data-spy="scroll" data-target="#list-example" data-offset="0" class="scrollspy-example">
-      <h4 id="list-item-1">Item 1</h4>
-      <p>...</p>
-      <h4 id="list-item-2">Set up cloud profiles</h4>
-      <p>...</p>
-      <img class="border border-secondary" src="{% static 'images/geopap-cloudsettings.png' %}">
-      <h4 id="list-item-3">Item 3</h4>
-      <p>...</p>
-      <h4 id="list-item-4">Item 4</h4>
-      <p>...</p>
-      <h4 id="list-item-5">Item 4</h4>
-      <p>...</p>
+    <div data-spy="scroll" data-target="#list-setup" data-offset="0" class="scrollspy-example" style="height: 440px; overflow: auto">
+      <div class="clearfix">
+        <img class="border border-secondary float-right" src="{% static 'images/output001.png' %}">
+        <h4 id="list-item-1">Get the Geopaparazzi App from the play store</h4>
+        <p>Install Geopaparazzi on your android device.  </p>
+        <a href="https://play.google.com/store/apps/details?id=eu.hydrologis.geopaparazzi">Download the app from the play store.</a>
+      </div>
+      <div class="clearfix">
+        <img class="border border-secondary float-left" src="{% static 'images/geopap-cloudsettings.png' %}">
+        <h4 id="list-item-2">Set up cloud profiles</h4>
+        <p>You will need a username and password from this site, sign up here.  In the app, navigate to Settings - Cloud Server Settings and enter your username and password.  Be sure to set the Cloud Profiles URL as shown.</p>
+      </div>
+      <div class="clearfix">
+        <img class="border border-secondary float-right" src="{% static 'images/output002.png' %}">
+        <p>Now from the main page of the app, select the 'Download' button on the lower left...</p>
+      </div>
+      <div class="clearfix">
+        <img class="border border-secondary float-right" src="{% static 'images/output003.png' %}">
+        <p>choose 'Cloud Profiles'...</p>
+      </div>
+      <div class="clearfix">
+        <img class="border border-secondary float-right" src="{% static 'images/output005.png' %}">
+        <p>It may take a while to download if there is a large map file, but you will get a confirmation when the download is complete.</p>
+      </div>
+      <div class="clearfix">
+        <img class="border border-secondary float-left" src="{% static 'images/output008.png' %}">
+        <h4 id="list-item-3">Collect some tracks and images</h4>
+        <p>Returning to the main menu, the left middle icon starts recording a GPS track...</p>
+      </div>
+      <div class="clearfix">
+        <img class="border border-secondary float-right" src="{% static 'images/output009.png' %}">
+        <p>At any time, you can click the upper left icon to record a note which may include photos, sketches or snapshots of the current map view....</p>
+      </div>
+      <div class="clearfix">
+        <img class="border border-secondary float-right" src="{% static 'images/output010.png' %}">
+        <p>Feel free to play around with the controls, you can add a text comment to any note...</p>
+      </div>
+      <div class="clearfix">
+        <img class="border border-secondary float-left" src="{% static 'images/output011.png' %}">
+        <h4 id="list-item-4">Upload your user project</h4>
+        <p>Return to the main menu and select the 'Upload' icon from the lower right, then select 'Cloud Profiles'...</p>
+      </div>
+      <div class="clearfix">
+        <img class="border border-secondary float-right" src="{% static 'images/output012.png' %}">
+        <p>You will see a list of the profiles on your device, select the one that you have been using and the collected data will be uploaded to the server...</p>
+      </div>
+      <div class="clearfix">
+        <img class="border border-secondary float-right" src="{% static 'images/output013.png' %}">
+        <p>It may take a while to upload all the data you have collected.  This step is best performed when you have a wifi connection to save on mobile data...</p>
+      </div>
+      <div class="clearfix">
+        <img class="border border-secondary float-right" src="{% static 'images/output014.png' %}">
+        <p>You will see a confirmation when your upload is complete.</p>
+      </div>
+      <div class="clearfix">
+        <img class="border border-secondary float-left" src="{% static 'images/profileshots.png' %}">
+        <h4 id="list-item-5">View your content</h4>
+        <p>That's it!  Now you can view your tracks and notes here on GeoTabloid!</p>
+      </div>
     </div>
   </div>
 </div>
