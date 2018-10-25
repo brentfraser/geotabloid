@@ -30,6 +30,7 @@ class MyProfiles(generics.RetrieveAPIView):
             obj = get_object_or_404(queryset, owner=User.objects.get(username="demo"))
         return obj
 
+
 class ProfileList(generics.ListCreateAPIView):
     """
     Returns a list of all available profiles.
