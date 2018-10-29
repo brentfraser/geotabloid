@@ -23,4 +23,10 @@ admin.site.register(Spatialitedbs)
 # note - check that OpenLayers.js is served from a HTTPS CDN or this will fail in production
 admin.site.register(Otherfiles, admin.OSMGeoAdmin)
 admin.site.register(Profile)
-admin.site.register(ProfileSet)
+
+class ProfileSetAdmin(admin.ModelAdmin):
+    date_hierarchy = 'modifieddate'
+    list_display = ('owner', 'public')
+    list_filter = ('public',)
+
+admin.site.register(ProfileSet, ProfileSetAdmin)

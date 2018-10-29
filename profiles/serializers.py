@@ -8,7 +8,8 @@ from rest_framework.fields import SkipField
 class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Project
-        fields = ('path', 'modifieddate', 'url', 'uploadurl', 'size' )
+        fields = ('path', 'modifieddate', 'url', 'uploadurl', 'size')
+#        fields = '__all__'
 
     # this bit is for omitting empty fields (size)
     def to_representation(self, instance):
