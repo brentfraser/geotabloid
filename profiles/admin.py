@@ -25,7 +25,6 @@ admin.site.register(Otherfiles, admin.OSMGeoAdmin)
 admin.site.register(Profile)
 
 class ProfileSetAdmin(admin.ModelAdmin):
-    date_hierarchy = 'modifieddate'
     list_display = ('owner', 'public')
     list_filter = ('public',)
 
