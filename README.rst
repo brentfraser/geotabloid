@@ -10,93 +10,143 @@ A demonstration server for GeoPaparazzi users
 
 :License: MIT
 
+Getting Started With A Local Server
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Settings
---------
+Prerequisites
+-------------
 
-Moved to settings_.
+Docker_ and Docker-compose_ (Linux) or Docker-desktop (Windows or Mac)
+Httpie_ or cUrl_
 
-.. _settings: http://cookiecutter-django.readthedocs.io/en/latest/settings.html
+.. _Docker: https://www.docker.com/products
+.. _Docker-compose: https://docs.docker.com/compose/install/
+.. _Httpie: https://httpie.org/
+.. _cUrl: https://curl.haxx.se/
 
-Basic Commands
---------------
 
-Setting Up Your Users
-^^^^^^^^^^^^^^^^^^^^^
-
-* To create a **normal user account**, just go to Sign Up and fill out the form. Once you submit it, you'll see a "Verify Your E-mail Address" page. Go to your console to see a simulated email verification message. Copy the link into your browser. Now the user's email should be verified and ready to go.
-
-* To create an **superuser account**, use this command::
-
-    $ python manage.py createsuperuser
-
-For convenience, you can keep your normal user logged in on Chrome and your superuser logged in on Firefox (or similar), so that you can see how the site behaves for both kinds of users.
-
-Type checks
-^^^^^^^^^^^
-
-Running type checks with mypy:
+Clone the repo and build the docker containers
+---------------------------------------------
 
 ::
+    $ git clone https://github.com/geoanalytic/geotabloid.git
+    $ cd geotabloid
+    $ docker-compose -f local.yml build
+    $ docker-compose -f local.yml up -d
+    $ docker-compose -f local.yml ps
 
-  $ mypy geotabloid
-
-Test coverage
-^^^^^^^^^^^^^
-
-To run the tests, check your test coverage, and generate an HTML coverage report::
-
-    $ coverage run -m pytest
-    $ coverage html
-    $ open htmlcov/index.html
-
-Running tests with py.test
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+Depending on how you have installed docker, you may need to preface the docker-compose commands with sudo.
+The ps command should result in a report like this.
 
 ::
+                  Name                         Command               State           Ports
+    -------------------------------------------------------------------------------------------
+    geotabloid_celerybeat_1     /entrypoint /start-celerybeat    Up
+    geotabloid_celeryworker_1   /entrypoint /start-celeryw ...   Up
+    geotabloid_django_1         /entrypoint /start               Up      0.0.0.0:8000->8000/tcp
+    geotabloid_flower_1         /entrypoint /start-flower        Up      0.0.0.0:5555->5555/tcp
+    geotabloid_postgres_1       /bin/sh -c /docker-entrypo ...   Up      5432/tcp
+    geotabloid_redis_1          docker-entrypoint.sh redis ...   Up      6379/tcp
 
-  $ pytest
+So long as the state of all the containers is Up, we are good to go.
 
-Live reloading and Sass CSS compilation
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Create a superuser and run the tests
+------------------------------------
 
-Moved to `Live reloading and SASS compilation`_.
+::
+    $ docker-compose -f local.yml run --rm django python manage.py migrate
+    $ docker-compose -f local.yml run --rm django python manage.py collectstatic
+    > y
+    $ docker-compose -f local.yml run --rm django python manage.py createsuperuser
+    > username
+    > email
+    > password
+    > repeat the password
+    $ docker-compose -f local.yml run --rm django py.test
 
-.. _`Live reloading and SASS compilation`: http://cookiecutter-django.readthedocs.io/en/latest/live-reloading-and-sass-compilation.html
+The py.test command should result in a report like this:
 
+::
+    Starting geotabloid_postgres_1 ... done
+    PostgreSQL is available
+    Test session starts (platform: linux, Python 3.6.5, pytest 3.8.0, pytest-sugar 0.9.1)
+    Django settings: config.settings.test (from ini file)
+    rootdir: /app, inifile: pytest.ini
+    plugins: sugar-0.9.1, django-3.4.3, celery-4.2.1
 
+     geotabloid/users/tests/test_forms.py ✓                                                                                       2% ▎
+     geotabloid/users/tests/test_models.py ✓                                                                                      4% ▍
+     geotabloid/users/tests/test_urls.py ✓✓✓✓                                                                                    11% █▏
+     geotabloid/users/tests/test_views.py ✓✓✓                                                                                    16% █▋
+     gp_projects/tests/test_models.py ✓✓✓                                                                                        21% ██▏
+     profiles/tests/test_api.py ✓✓✓✓✓✓✓✓✓✓✓✓✓✓✓✓✓✓✓✓✓✓✓                                                                          61% ██████▎
+     profiles/tests/test_models.py ✓✓✓✓✓✓✓✓✓✓✓✓✓✓✓✓✓✓✓✓✓✓                                                                       100% ██████████
 
-Celery
-^^^^^^
+    Results (6.27s):
+          57 passed
 
-This app comes with Celery.
+Load the demo data
+------------------
 
-To run a celery worker:
+First load the demo data files, which are in the profiles/fixtures folder.  There are shell scripts there to use either Httpie or cUrl, you only need to execute one ot these. but before you begin, edit the file and replace user:password with the username and password you supplied for the superuser.
+Execute this command from the fixtures folder.
 
-.. code-block:: bash
+::
+    $ ./load_httpie.sh
 
-    cd geotabloid
-    celery -A geotabloid.taskapp worker -l info
+Returning to the main GeoTabloid folder, load the fixture data to connect up the demo data to the superuser account.
 
-Please note: For Celery's import magic to work, it is important *where* the celery commands are run. If you are in the same folder with *manage.py*, you should be right.
+::
+    $ docker-compose -f local.yml run --rm django python manage.py loaddata profiles/fixtures/minimal.json
 
+Now, open your browser and point it to http://localhost:8000/profiles/myprofiles/
+You should see a page like this:
 
+::
+    HTTP 200 OK
+    Allow: GET, HEAD, OPTIONS
+    Content-Type: application/json
+    Vary: Accept
 
+    {
+        "formatVersion": 1.1,
+        "profiles": [
+            {
+                "name": "GeoTabloid",
+                "description": "demo geotabloid cloud profile",
+                "creationdate": "2018-10-30T18:31:25.841000Z",
+                "modifieddate": "2018-10-30T18:31:25.841000Z",
+                "color": "#FBC02D",
+                "active": true,
+                "sdcardPath": "MAINSTORAGE",
+                "mapView": "52.02025604248047,-115.70208740234375,10.0",
+                "project": {
+                    "path": "/geotabloid/geotabloid_demo.gpap",
+                    "modifieddate": "2018-10-30T18:28:37.511619Z",
+                    "url": "http://localhost:8000/media/projects/geotabloid_demo.gpap",
+                    "uploadurl": "/profiles/userprojects/",
+                    "size": "110592"
+                },
+                "tags": {
+                    "path": "/geotabloid/tags.json",
+                    "modifieddate": "2018-10-30T18:28:37.628130Z",
+                    "url": "http://localhost:8000/media/dave/tags/tags.json",
+                    "size": "2702",
+                    "owner": 1
+                },
+                "basemaps": [
+                    {
+                        "path": "/geotabloid/mapnik.mapurl",
+                        "modifieddate": "2018-10-30T18:28:37.572963Z",
+                        "url": "http://localhost:8000/media/basemaps/mapnik.mapurl",
+                        "size": "323"
+                    }
+                ],
+                "spatialitedbs": [],
+                "otherfiles": []
+            }
+        ]
+    }
 
-
-Deployment
-----------
-
-The following details how to deploy this application.
-
-
-
-Docker
-^^^^^^
-
-See detailed `cookiecutter-django Docker documentation`_.
-
-.. _`cookiecutter-django Docker documentation`: http://cookiecutter-django.readthedocs.io/en/latest/deployment-with-docker.html
-
-
+Success!
 
