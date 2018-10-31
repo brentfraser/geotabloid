@@ -26,6 +26,7 @@ class ImageNoteSerializer(GeoFeatureModelSerializer):
 
 class NGImageNoteSerializer(serializers.ModelSerializer):
     """ A class to serialize ImageNotes without the geo bits """
+    timestamp = serializers.DateTimeField(format='%Y-%m-%d %X')
 
     class Meta:
         model = ImageNote
@@ -34,6 +35,8 @@ class NGImageNoteSerializer(serializers.ModelSerializer):
 
 class NGTrackFeatureSerializer(serializers.ModelSerializer):
     """ A class to serialize Tracks without the geo bits """
+    timestamp_start = serializers.DateTimeField(format='%Y-%m-%d %X')
+    timestamp_end = serializers.DateTimeField(format='%Y-%m-%d %X')
 
     class Meta:
         model = TrackFeature
@@ -64,6 +67,7 @@ class NGNoteSerializer(serializers.ModelSerializer):
         many=True,
         read_only=True,
      )
+    timestamp = serializers.DateTimeField(format='%Y-%m-%d %X')
 
 
     class Meta:

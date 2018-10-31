@@ -17,7 +17,7 @@ class PointFeature(models.Model):
     location = models.PointField(dim=2)
     lat = models.FloatField(verbose_name="Latitude (WGS84)")
     lon = models.FloatField(verbose_name="Longitude (WGS84)")
-    altitude = models.FloatField(null=True, blank=True)
+    altitude = models.DecimalField(max_digits=12, decimal_places=3, null=True, blank=True)
     timestamp = models.DateTimeField(null=True, blank=True)
     modifieddate = models.DateTimeField(auto_now_add=True)
     owner = models.ForeignKey('users.user', to_field='id', on_delete=models.CASCADE)
@@ -42,7 +42,7 @@ class ImageNote(PointFeature):
     """
     image = models.ImageField(upload_to=userdata_directory_path)
     thumbnail = models.ImageField(upload_to=userdata_directory_path)
-    azimuth = models.FloatField(null=True, blank=True)
+    azimuth = models.DecimalField(max_digits=12, decimal_places=3, null=True, blank=True)
     note = models.ForeignKey(Note, related_name='images', on_delete=models.CASCADE)
 
     def thumbnail_tag(self):
@@ -60,7 +60,7 @@ class TrackFeature(models.Model):
     modifieddate = models.DateTimeField(auto_now_add=True)
     owner = models.ForeignKey('users.user', to_field='id', on_delete=models.CASCADE)
     text = models.TextField(null=True, blank=True, verbose_name="Text note")
-    lengthm = models.FloatField(null=True, blank=True, verbose_name="Track length in metres")
+    lengthm = models.DecimalField(max_digits=12, decimal_places=3, null=True, blank=True, verbose_name="Track length in metres")
 
     def __str__(self):
         return '{0} {1}'.format(self.owner, self.timestamp_start)
