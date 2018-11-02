@@ -1,4 +1,5 @@
 import os
+import json
 from django.contrib.gis.db import models
 from django.contrib.postgres.fields import JSONField
 from django.utils.safestring import mark_safe
@@ -36,6 +37,15 @@ class Note(PointFeature):
     text = models.TextField(null=True, blank=True, verbose_name="Text note")
     form = JSONField(null=True, blank=True, verbose_name="Form element")
 
+    def form_selection(self):
+        fd = json.loads(self.form)
+        fs = ''
+        for f in fd['forms']:
+            for fi in f['formitems']:
+                if fi['value']:
+                    fs = fs + '<p class="card-title">' + fi['key'] + " : "
+                    fs = fs + fi['value'] + "</p>"
+        return fs
 
 class ImageNote(PointFeature):
     """ an image, sketch or map note

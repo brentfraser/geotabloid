@@ -63,6 +63,7 @@ class NoteSerializer(GeoFeatureModelSerializer):
 
 class NGNoteSerializer(serializers.ModelSerializer):
     """ A class to serialize Notes without the geo bits """
+#    form_selection = serializers.SerializerMethodField()
     images = ImageUrlField(
         many=True,
         read_only=True,
@@ -72,4 +73,4 @@ class NGNoteSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Note
-        fields = ('id', 'lat', 'lon', 'altitude', 'timestamp', 'owner', 'text', 'form', 'images')
+        fields = ('id', 'lat', 'lon', 'altitude', 'timestamp', 'owner', 'text', 'form', 'images', 'form_selection')

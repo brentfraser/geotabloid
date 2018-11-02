@@ -48,12 +48,15 @@
 			</div>
 		  </div>
 {% for image in image_list %}
-      <div class="card card-pin">
+      <div class="card card-pin text-center">
 			<img class="card-img" src="{{ image.image.url }}" alt="Card image">
 			  <div class="overlay">
-				<h3 class="card-title title">Some Title</h3>
+				<h3 class="card-title title">{{ image.note.text }}</h3>
+        <h6 class="card-title">{{ image.timestamp }}</h6>
+        <p class="card-title">{{ image.lat }}  {{ image.lon }}</p>
+          {{ image.note.form_selection|safe }}
 				<div class="download">
-				  <a href="http://lorempixel.com/486/320/" download>
+				  <a href="{{ image.image.url }}" download>
 					<i class="fa fa-download" aria-hidden="true"></i>
 				  </a>
 				</div>
