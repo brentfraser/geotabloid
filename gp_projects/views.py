@@ -9,10 +9,13 @@ from django.core.serializers import serialize
 
 # Geojson serializer
 def geojsonTrackFeed(request):
+    """ returns all of the trackfeatures as geoJSON
+    this should be revised to allow filtering """
     return HttpResponse(serialize('geojson', TrackFeature.objects.all(), fields=('timestamp_start', 'linestring')))
 
 
 class TrackList(generics.ListAPIView):
+    """ a restful view of TrackFeatures by owner """
     serializer_class = TrackFeatureSerializer
     permission_classes = (permissions.IsAuthenticated,)
 
@@ -22,12 +25,14 @@ class TrackList(generics.ListAPIView):
 
 
 class TrackDetail(generics.RetrieveAPIView):
+    """ a restful detail view of a TrackFeature """
     queryset = TrackFeature.objects.all()
     serializer_class = TrackFeatureSerializer
     permission_classes = (permissions.IsAuthenticated,)
 
 
 class NGTrackFeatureList(generics.ListAPIView):
+    """ a restful view of TrackFeatures by user, without the coordinates """
     serializer_class = NGTrackFeatureSerializer
     permission_classes = (permissions.IsAuthenticated,)
 
@@ -37,6 +42,7 @@ class NGTrackFeatureList(generics.ListAPIView):
 
 
 class ImageNoteList(generics.ListAPIView):
+    """ a restful view of ImageNotes by owner """
     serializer_class = ImageNoteSerializer
     permission_classes = (permissions.IsAuthenticated,)
 
@@ -45,6 +51,7 @@ class ImageNoteList(generics.ListAPIView):
         return ImageNote.objects.filter(owner=user)
 
 class ImageNoteDetail(generics.RetrieveAPIView):
+    """ a restful detail view of an ImageNote """
     serializer_class = ImageNoteSerializer
     permission_classes = (permissions.IsAuthenticated,)
 
@@ -53,6 +60,7 @@ class ImageNoteDetail(generics.RetrieveAPIView):
         return ImageNote.objects.filter(owner=user)
 
 class NGImageNoteList(generics.ListAPIView):
+    """ a restful view of ImageNotes, without the coordinate data """
     serializer_class = NGImageNoteSerializer
     permission_classes = (permissions.IsAuthenticated,)
 
@@ -62,6 +70,7 @@ class NGImageNoteList(generics.ListAPIView):
 
 
 class NGImageNoteDetail(generics.RetrieveAPIView):
+    """ a restful detail view of an ImageNote, without the coordinate data """
     serializer_class = NGImageNoteSerializer
     permission_classes = (permissions.IsAuthenticated,)
 
@@ -71,6 +80,7 @@ class NGImageNoteDetail(generics.RetrieveAPIView):
 
 
 class NGNoteList(generics.ListAPIView):
+    """ a restful view of Notes by owner, without the coordinate data """
     serializer_class = NGNoteSerializer
     permission_classes = (permissions.IsAuthenticated,)
 
@@ -80,6 +90,7 @@ class NGNoteList(generics.ListAPIView):
 
 
 class NGNoteDetail(generics.RetrieveAPIView):
+    """ a restful detail view of a Note, without the coordinate data """
     serializer_class = NGNoteSerializer
     permission_classes = (permissions.IsAuthenticated,)
 

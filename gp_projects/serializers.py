@@ -44,6 +44,7 @@ class NGTrackFeatureSerializer(serializers.ModelSerializer):
 
 
 class ImageUrlField(serializers.RelatedField):
+    """ a class to provide a list of image links for the note serializer """
     def to_representation(self, instance):
         url = instance.image.url
         request = self.context.get('request', None)
