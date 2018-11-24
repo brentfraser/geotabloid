@@ -78,13 +78,13 @@ The py.test command should result in a report like this:
  rootdir: /app, inifile: pytest.ini
  plugins: sugar-0.9.1, django-3.4.3, celery-4.2.1
  
-  geotabloid/users/tests/test_forms.py ✓                                                                                       2% ▎
-  geotabloid/users/tests/test_models.py ✓                                                                                      4% ▍
-  geotabloid/users/tests/test_urls.py ✓✓✓✓                                                                                    11% █▏
-  geotabloid/users/tests/test_views.py ✓✓✓                                                                                    16% █▋
-  gp_projects/tests/test_models.py ✓✓✓                                                                                        21% ██▏
-  profiles/tests/test_api.py ✓✓✓✓✓✓✓✓✓✓✓✓✓✓✓✓✓✓✓✓✓✓✓                                                                          61% ██████▎
-  profiles/tests/test_models.py ✓✓✓✓✓✓✓✓✓✓✓✓✓✓✓✓✓✓✓✓✓✓                                                                       100% ██████████
+  geotabloid/users/tests/test_forms.py ✓                               2% ▎
+  geotabloid/users/tests/test_models.py ✓                              4% ▍
+  geotabloid/users/tests/test_urls.py ✓✓✓✓                           11% █▏
+  geotabloid/users/tests/test_views.py ✓✓✓                           16% █▋
+  gp_projects/tests/test_models.py ✓✓✓                               21% ██▏
+  profiles/tests/test_api.py ✓✓✓✓✓✓✓✓✓✓✓✓✓✓✓✓✓✓✓✓✓✓✓           61% ██████▎
+  profiles/tests/test_models.py ✓✓✓✓✓✓✓✓✓✓✓✓✓✓✓✓✓✓✓✓✓✓         100% ██████████
  
  Results (6.27s):
        57 passed
@@ -105,7 +105,8 @@ Returning to the main GeoTabloid folder, load the fixture data to connect up the
 
     $ docker-compose -f local.yml run --rm django python manage.py loaddata profiles/fixtures/minimal.json
 
-Now, open your browser and point it to http://localhost:8000/profiles/myprofiles/
+Now, open your browser and point it to http://localhost:8000/profiles/myprofiles/ or if you want to access it from a different computer, use http://<my server ip address>:8000/profiles/myprofiles/
+
 You should see a page like this:
 
 ::
@@ -157,3 +158,4 @@ You should see a page like this:
 
 Success!
 
+Now have a look at http://localhost:8000 
