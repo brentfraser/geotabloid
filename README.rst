@@ -97,6 +97,8 @@ Execute this command from the fixtures folder.
 
 ::
 
+    $ cd profiles/fixtures
+       <edit load_httpie.sh>
     $ ./load_httpie.sh
 
 Returning to the main GeoTabloid folder, load the fixture data to connect up the demo data to the superuser account.
