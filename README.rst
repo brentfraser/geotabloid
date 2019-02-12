@@ -1,11 +1,11 @@
 GeoTabloid
 ==========
 
-A demonstration server for GeoPaparazzi users.  Using Django_, Django REST Framework_ and PostGIS_ this service provides upload and download functions for the GeoPaparazzi app along with some useful templates for exploring the notes, tracks and photos that you collect.
+A demonstration server for GeoPaparazzi users.  Using Django_, 'Django REST Framework'_ and PostGIS_ this service provides upload and download functions for the GeoPaparazzi app along with some useful templates for exploring the notes, tracks and photos that you collect.
 
-.. Django: https://www.djangoproject.com/
-.. Django REST Framework: https://www.django-rest-framework.org/
-.. PostGIS: https://postgis.net/
+.. _Django: https://www.djangoproject.com/
+.. _'Django REST Framework': https://www.django-rest-framework.org/
+.. _PostGIS: https://postgis.net/
 
 .. image:: https://img.shields.io/badge/built%20with-Cookiecutter%20Django-ff69b4.svg
      :target: https://github.com/pydanny/cookiecutter-django/
