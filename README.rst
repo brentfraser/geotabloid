@@ -1,7 +1,7 @@
 GeoTabloid
 ==========
 
-A demonstration server for GeoPaparazzi users
+A demonstration server for GeoPaparazzi users.
 
 .. image:: https://img.shields.io/badge/built%20with-Cookiecutter%20Django-ff69b4.svg
      :target: https://github.com/pydanny/cookiecutter-django/
@@ -59,12 +59,28 @@ Create a superuser and run the tests
 
     $ docker-compose -f local.yml run --rm django python manage.py migrate
     $ docker-compose -f local.yml run --rm django python manage.py collectstatic
-      y
+    Starting geotabloid_postgres_1 ... done
+    PostgreSQL is available
+
+    You have requested to collect static files at the destination
+    location as specified in your settings:
+
+        /app/staticfiles
+
+    This will overwrite existing files!
+    Are you sure you want to do this?
+
+    Type 'yes' to continue, or 'no' to cancel: yes
+    ...
     $ docker-compose -f local.yml run --rm django python manage.py createsuperuser
-      username
-      email
-      password
-      repeat the password
+    Starting geotabloid_postgres_1 ... done
+    PostgreSQL is available
+    Username: dave
+    Email address: test@test.com
+    Password:
+    Password (again):
+    Superuser created successfully.
+
     $ docker-compose -f local.yml run --rm django py.test
 
 The py.test command should result in a report like this:
@@ -88,6 +104,11 @@ The py.test command should result in a report like this:
  
  Results (6.27s):
        57 passed
+
+Open a browser and point it at http://localhost:8000 and you should see a welcome page like this:
+
+..image:: img/welcome_page.png
+
 
 Load the demo data
 ------------------
