@@ -1,7 +1,7 @@
 GeoTabloid
 ==========
 
-A demonstration server for GeoPaparazzi users.
+A demonstration server for GeoPaparazzi users.  Using Django, Django-Rest-Framework and PostGIS this service provides upload and download functions for GeoPaparazzi along with some useful templates for exploring the notes, tracks and photos that you collect.
 
 .. image:: https://img.shields.io/badge/built%20with-Cookiecutter%20Django-ff69b4.svg
      :target: https://github.com/pydanny/cookiecutter-django/
@@ -110,72 +110,59 @@ Open a browser and point it at http://localhost:8000 and you should see a welcom
 
 .. image:: ./img/welcome_page.png
 
+Click on the 'Sign In' menu item and enter the superuser name and password you entered above.  Because we are running locally, there is no confirmation email being sent, so you will need to look in the logs for the link
+
+::
+
+    $ docker-compose -f local.yml logs django
+
+    django_1        | 172.17.0.1 - - [12/Feb/2019 00:03:37] "GET / HTTP/1.1" 200 -
+    django_1        | 172.17.0.1 - - [12/Feb/2019 00:03:37] "GET /static/images/output013.png HTTP/1.1" 304 -
+    django_1        | 172.17.0.1 - - [12/Feb/2019 00:03:37] "GET /static/images/output014.png HTTP/1.1" 304 -
+    django_1        | 172.17.0.1 - - [12/Feb/2019 00:03:38] "GET /accounts/login/ HTTP/1.1" 200 -
+    django_1        | Content-Type: text/plain; charset="utf-8"
+    django_1        | MIME-Version: 1.0
+    django_1        | Content-Transfer-Encoding: 7bit
+    django_1        | Subject: [GeoTabloid] Please Confirm Your E-mail Address
+    django_1        | From: webmaster@localhost
+    django_1        | To: test@test.com
+    django_1        | Date: Tue, 12 Feb 2019 00:03:41 -0000
+    django_1        | Message-ID: <154992982130.60.2032796483362449740@b8c2d959abf6>
+    django_1        |
+    django_1        | Hello from GeoTabloid!
+    django_1        |
+    django_1        | You're receiving this e-mail because user dave has given yours as an e-mail address to connect their account.
+    django_1        |
+    django_1        | To confirm this is correct, go to http://localhost:8000/accounts/confirm-email/MQ:1gtLY5:zDrrkmM5TmknhfeIP_20uptlHXo/
+    django_1        |
+    django_1        | Thank you from GeoTabloid!
+    django_1        | trailstewards.com
+
+Copy the confirmation link into your browser address bar and you should get a confirmation screen and be logged in.
 
 Load the demo data
 ------------------
 
-First load the demo data files, which are in the profiles/fixtures folder.  There are shell scripts there to use either Httpie or cUrl, you only need to execute one ot these. but before you begin, edit the file and replace user:password with the username and password you supplied for the superuser.
+Now load the demo data files, which are in the profiles/fixtures folder.  There are shell scripts there to use either Httpie or cUrl, you only need to execute one ot these. but before you begin, edit the file and replace user:password with the username and password you supplied for the superuser.
 Execute this command from the fixtures folder.
 
 ::
 
+    $ cd profiles/fixtures
     $ ./load_httpie.sh
 
 Returning to the main GeoTabloid folder, load the fixture data to connect up the demo data to the superuser account.
 
 ::
 
+    $ cd ../..
     $ docker-compose -f local.yml run --rm django python manage.py loaddata profiles/fixtures/minimal.json
+    Installed 2 object(s) from 1 fixture(s)
 
 Now, open your browser and point it to http://localhost:8000/profiles/myprofiles/
 You should see a page like this:
 
-::
+.. image:: ./img/myprofiles.png
 
- HTTP 200 OK
- Allow: GET, HEAD, OPTIONS
- Content-Type: application/json
- Vary: Accept
- 
- {
-     "formatVersion": 1.1,
-     "profiles": [
-         {
-             "name": "GeoTabloid",
-             "description": "demo geotabloid cloud profile",
-             "creationdate": "2018-10-30T18:31:25.841000Z",
-             "modifieddate": "2018-10-30T18:31:25.841000Z",
-             "color": "#FBC02D",
-             "active": true,
-             "sdcardPath": "MAINSTORAGE",
-             "mapView": "52.02025604248047,-115.70208740234375,10.0",
-             "project": {
-                 "path": "/geotabloid/geotabloid_demo.gpap",
-                 "modifieddate": "2018-10-30T18:28:37.511619Z",
-                 "url": "http://localhost:8000/media/projects/geotabloid_demo.gpap",
-                 "uploadurl": "/profiles/userprojects/",
-                 "size": "110592"
-             },
-             "tags": {
-                 "path": "/geotabloid/tags.json",
-                 "modifieddate": "2018-10-30T18:28:37.628130Z",
-                 "url": "http://localhost:8000/media/dave/tags/tags.json",
-                 "size": "2702",
-                 "owner": 1
-             },
-             "basemaps": [
-                 {
-                     "path": "/geotabloid/mapnik.mapurl",
-                     "modifieddate": "2018-10-30T18:28:37.572963Z",
-                     "url": "http://localhost:8000/media/basemaps/mapnik.mapurl",
-                     "size": "323"
-                 }
-             ],
-             "spatialitedbs": [],
-             "otherfiles": []
-         }
-     ]
- }
 
-Success!
 
