@@ -107,7 +107,7 @@ The py.test command should result in a report like this:
 
 Open a browser and point it at http://localhost:8000 and you should see a welcome page like this:
 
-..image:: img/welcome_page.png
+..image:: ./img/welcome_page.png
 
 
 Load the demo data
