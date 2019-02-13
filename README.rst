@@ -1,10 +1,10 @@
 GeoTabloid
 ==========
 
-A demonstration server for GeoPaparazzi users.  Using Django_, 'Django REST Framework'_ and PostGIS_ this service provides upload and download functions for the GeoPaparazzi app along with some useful templates for exploring the notes, tracks and photos that you collect.
+A demonstration server for GeoPaparazzi users.  Using Django_, Django-REST-Framework_ and PostGIS_ this service provides upload and download functions for the GeoPaparazzi app along with some useful templates for exploring the notes, tracks and photos that you collect.
 
 .. _Django: https://www.djangoproject.com/
-.. _'Django REST Framework': https://www.django-rest-framework.org/
+.. _Django-REST-Framework: https://www.django-rest-framework.org/
 .. _PostGIS: https://postgis.net/
 
 .. image:: https://img.shields.io/badge/built%20with-Cookiecutter%20Django-ff69b4.svg
@@ -163,19 +163,45 @@ Returning to the main GeoTabloid folder, load the fixture data to connect up the
     $ docker-compose -f local.yml run --rm django python manage.py loaddata profiles/fixtures/minimal.json
     Installed 2 object(s) from 1 fixture(s)
 
+Finally, in your browser, select the Admin | Database Admin menu item.  This should open a Django Administration window like this:
+
+.. image:: ./img/admin1.png
+
+For a local server, the base URL of the server needs to have the IP address filled in.  The Django Administration tool makes this pretty easy.  Click on Projects and click the /geotabloid/geotabloid_demo.gpap link.  This will give you a page like this:
+
+.. image:: ./img/edit_project.png
+
+If you look at the Uploadurl field, you will see that this is not a valid url.  In a production system, this url is automatically filled in.  Edit this string using the IP address of your server so the field looks like this:
+
+.. image:: ./img/fixed_project.png
+
+In this case, the IP address for my laptop is 172.17.195.254.  Yours will likely be different, on Linux, use ifconfig to find the value.  On Windows the command is ipconfig.
+
 Now, open your browser and point it to http://localhost:8000/profiles/myprofiles/
 You should see a page like this:
 
 .. image:: ./img/myprofiles.png
 
 This shows the REST api that the Geopaparazzi app will access to download the cloud profile data.  If you refer to the home page, there are instructions for installing and setting up the app to use GeoTabloid.
-The only thing that you need to adjust is the string that you enter in the Cloud Profiles URL setting.  For this, you need the IP address of your computer.  Assuming it is something like 192.2.0.100, then you should enter:
-
+The only thing that you need to adjust is the string that you enter in the Cloud Profiles URL setting.  For this, you need the IP address of your computer.  Assuming it is something like 172.17.195.254, then you should enter:
 ::
-    http://192.2.0.100:8000/profiles/myprofiles/
+    http://172.17.195.254:8000/profiles/myprofiles/
 
 Now, go ahead and use Geopaparazzi to collect images, notes and tracks.  When you are done, upload the cloud profile data (note your phone must be on the same network as your server).
 Once you have completed the upload, the server will index and process the data which is then available for you to view and download.  See the example screenshots below:
+
+
+.. image:: ./img/userprofile.png
+User info and recent photo uploads are shown on the My Profile page.
+
+.. image:: ./img/tracks.png
+A selectable list of tracks and a map display is shown on the My Tracks page.
+
+.. image:: ./img/usernotes.png
+Similar lists and maps are shown on the My Notes and My Images pages.
+
+.. image:: ./img/formbuilder.png
+A form builder app is supplied to allow you to create Geopaparazzi forms (tags)
 
 
 
