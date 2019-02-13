@@ -4,7 +4,7 @@
 
 <h1 id="about-this-server">About This Server</h1>
 <p>Welcome to the GeoTabloid website! This is the place you can test out and experiment with serving up Geopaparazzi's <a href="https://geopaparazzi.github.io/geopaparazzi/#_synchronization_of_geopaparazzi_datasets_in_the_cloud">Cloud Profiles</a>.</p>
-<p><a href="https://play.google.com/store/apps/details?id=eu.hydrologis.geopaparazzi&amp;hl=en">Geopaparazzi</a> is a great GIS field data collection app and a good server like this one can go a long way to easing your data management tasks.</p>
+<p><a href="https://play.google.com/store/apps/details?id=eu.hydrologis.geopaparazzi&amp;hl=en">Geopaparazzi</a> is a great GIS field data collection app and a flexible server like this one can go a long way to easing your data management tasks.</p>
 <p>This site is an example of the Geopaparazzi Reference Server, so if you like what you see and want to do more, head on over to the <a href="https://github.com/geoanalytic/cookiecutter-geopaparazzi-server">Geopaparazzi Reference Server repository</a> and get the code.</p>
 <p>There are also blog posts if you want a more in depth explanation:</p>
 <p><a href="https://geoanalytic.github.io/a-reference-server-for-geopaparazzi-cloud-profiles/">A reference server for geopaparazzi cloud profiles</a></p>
@@ -13,6 +13,7 @@
 <p>The data you upload will be deleted from this server after 7 days.</p>
   
   {% if branding is True %}
+{#    Show the footer if the GEO_BRANDING setting is True#}
     <footer class="footer">
       <div class="container">
         <span class="text-muted">This site was developed by GeoAnalytic Inc, &copy; 2018, all rights reserved.</span>

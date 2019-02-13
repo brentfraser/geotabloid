@@ -112,7 +112,7 @@ The py.test command should result in a report like this:
 Open a browser and point it at http://localhost:8000 and you should see a welcome page like this:
 
 
-.. image:: ./img/welcome_page.png
+.. image:: ./img/homepage.png
 
 Click on the 'Sign In' menu item and enter the superuser name and password you entered above.  Because we are running locally, there is no confirmation email being sent, so you will need to look in the logs for the link
 
@@ -167,6 +167,15 @@ Now, open your browser and point it to http://localhost:8000/profiles/myprofiles
 You should see a page like this:
 
 .. image:: ./img/myprofiles.png
+
+This shows the REST api that the Geopaparazzi app will access to download the cloud profile data.  If you refer to the home page, there are instructions for installing and setting up the app to use GeoTabloid.
+The only thing that you need to adjust is the string that you enter in the Cloud Profiles URL setting.  For this, you need the IP address of your computer.  Assuming it is something like 192.2.0.100, then you should enter:
+
+::
+    http://192.2.0.100:8000/profiles/myprofiles/
+
+Now, go ahead and use Geopaparazzi to collect images, notes and tracks.  When you are done, upload the cloud profile data (note your phone must be on the same network as your server).
+Once you have completed the upload, the server will index and process the data which is then available for you to view and download.  See the example screenshots below:
 
 
 
