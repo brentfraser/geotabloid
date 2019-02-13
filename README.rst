@@ -147,7 +147,7 @@ Copy the confirmation link into your browser address bar and you should get a co
 Load the demo data
 ------------------
 
-Now load the demo data files, which are in the profiles/fixtures folder.  There are shell scripts there to use either Httpie or cUrl, you only need to execute one ot these. but before you begin, edit the file and replace user:password with the username and password you supplied for the superuser.
+Now load the demo data files, which are in the profiles/fixtures folder.  There are shell scripts there to use either Httpie_ or cUrl_, you only need to execute one of these. but before you begin, edit the file and replace user:password with the username and password you supplied for the superuser.
 Execute this command from the fixtures folder.
 
 ::
@@ -175,7 +175,7 @@ If you look at the Uploadurl field, you will see that this is not a valid url.  
 
 .. image:: ./img/fixed_project.png
 
-In this case, the IP address for my laptop is 172.17.195.254.  Yours will likely be different, on Linux, use ifconfig to find the value.  On Windows the command is ipconfig.
+Click the Save button to update the database.  In this case, the IP address for my laptop is 172.17.195.254.  Yours will likely be different, on Linux, use ifconfig to find the value.  On Windows the command is ipconfig.
 
 Now, open your browser and point it to http://localhost:8000/profiles/myprofiles/
 You should see a page like this:
