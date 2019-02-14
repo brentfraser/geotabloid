@@ -20,11 +20,12 @@ Getting Started With A Local Server
 Prerequisites
 -------------
 
-* Docker_ and Docker-compose_ (Linux) or Docker-desktop (Windows or Mac)
+* Docker_ and Docker-compose_ (Linux) or Docker-desktop_ (Windows or Mac)
 * Httpie_ or cUrl_
 
 .. _Docker: https://www.docker.com/products
 .. _Docker-compose: https://docs.docker.com/compose/install/
+.. _Docker-desktop: https://www.docker.com/products/docker-desktop
 .. _Httpie: https://httpie.org/
 .. _cUrl: https://curl.haxx.se/
 
