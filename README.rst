@@ -196,7 +196,7 @@ Once you have completed the upload, the server will index and process the data w
 .. image:: ./img/userprofile.png
 User info and recent photo uploads are shown on the My Profile page.
 
-.. image:: ./img/tracks.png
+.. image:: ./img/mytracks.gif
 A selectable list of tracks and a map display is shown on the My Tracks page.
 
 .. image:: ./img/usernotes.png
